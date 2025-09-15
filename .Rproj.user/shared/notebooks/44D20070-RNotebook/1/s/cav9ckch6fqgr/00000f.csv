@@ -1,0 +1,21 @@
+"0","plot(cars)"
+"2","Warning messages:
+"
+"2","1: "
+"2","In attr(x, ""match.length"") :"
+"2"," 'xfun::attr()' is deprecated.
+Use 'xfun::attr2()' instead.
+See help(""Deprecated"")
+"
+"2","2: "
+"2","In attr(x, ""match.length"") :"
+"2"," 'xfun::attr()' is deprecated.
+Use 'xfun::attr2()' instead.
+See help(""Deprecated"")
+"
+"2","3: "
+"2","In attr(x, ""knit_meta"") :"
+"2"," 'xfun::attr()' is deprecated.
+Use 'xfun::attr2()' instead.
+See help(""Deprecated"")
+"
