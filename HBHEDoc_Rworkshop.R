@@ -1,3 +1,9 @@
+# these lines just get this code to work
+install.packages("tidyverse")
+install.packages("pacman")
+library(tidyverse)
+library(pacman)
+
 ## R symbols ======================================================================================
 # hashtag: comment
 
@@ -8,6 +14,7 @@
 #' multiple lines
 #' and I don't need to
 #' type hash every time
+
 
 # can also comment at the end of a line
 1 # the number 1
@@ -25,7 +32,7 @@ two = 2
 #' you can use either arrow or assign.
 #' I prefer arrow, which is more conventional in R.
 #' When we assign things, the output of what we assign does not appear in the console
-#' (or wherever we're printing out). To see the output, we have to clal the object. Or we can wrap
+#' (or wherever we're printing out). To see the output, we have to call the object. Or we can wrap
 #' the assignment call in parentheses.
 
 check <- 1 + 1
@@ -72,7 +79,7 @@ TRUE & TRUE
 
 (1 == 1) != (1 == 2)
 
-(1 == 1 | 1 == 2) & (2 == 2)
+((1 == 1) | (1 == 2)) & (2 == 2)
 
 # there are other logical operators, like %in%
 1 %in% c(1, 2, 3)
@@ -85,7 +92,7 @@ TRUE & TRUE
 lm(mpg ~ cyl, data = mtcars)
 
 ## Packages =======================================================================================
-install.packages("dplyr", "ggplot2", "tidyverse")
+install.packages("dplyr")
 library(dplyr)
 
 # alternatively, you can use the package pacman (package manager)
@@ -110,6 +117,7 @@ typeof(1.2)
 
 # integer: integer numbers. R will save all numbers as doubles unless told otherwise
 as.integer(1)
+typeof(as.integer(1))
 
 # logical: TRUE or FALSE or NA
 # often called boolean in other languages
@@ -202,6 +210,7 @@ testdf$labels # this basically returns our vector
 testdf$labels[2]
 
 # or we can index the same way (with the brackets, but we have two dimensions now-- row and column)
+# testdf[row, column]
 testdf[1, 2] # row 1, column 2 of testdf
 testdf[1, "values"]
 
@@ -229,6 +238,7 @@ mean(c(1, 2, 3, NA), na.rm = TRUE)
 # we can get more information about functions using this command: ?function
 ?mean
 ?pnorm
+
 # we can also Google them, which I would highly encourage
 
 # Example: pnorm. Nested functions
@@ -243,7 +253,7 @@ sayhi <- function(name){
   print(paste("Hello, ", name))
 }
 
-sayhi(name = "Jessica")
+sayhi("Jessica")
 
 add1 <- function(number){
   return(number + 1)
@@ -255,15 +265,16 @@ testfunction <- add1(2)
 ## Downloading and manipulating data ===============================================================================
 # setwd()
 getwd()
-gva_data <- read.csv("export-31415fd9-bb11-4d77-b505-bba139481462.csv")
+gva_data <- read.csv("/Users/jess.bishai/Downloads/export-47ef654b-4bff-4361-80d5-e72aed2860e9.csv")
 nrow(gva_data)
 ncol(gva_data)
+dim(gva_data)
 head(gva_data)
 View(gva_data)
 summary(gva_data)
 colnames(gva_data)
 
-gva_mi <- gva_data[gva_data$State == "Michigan",]
+gva_mi <- gva_data[gva_data$State == "Michigan", ]
 gva_data$State == "Michigan"
 
 mean(gva_data$Victims.Injured)
@@ -271,16 +282,21 @@ sort(gva_data$Victims.Killed)
 
 # we can make changes to our data and write it back out
 gva_data$Total.Killed <- gva_data$Victims.Killed + gva_data$Suspects.Killed
-write.csv(gva_data, "gva_data_modified.csv")
+
+write.csv(gva_data, "/Users/jess.bishai/Downloads/gva_data_modified.csv")
 
 # try it yourself. First, let's get the year. This is complicated, so I'll give it to you
 gva_data$date <- as.Date(gva_data$Incident.Date, format = "%B %d, %Y")
-gva_data$year <- year(gva_data$date)
+gva_data$year <- format(as.Date(df1$Date, format="%d/%m/%Y"),"%Y")
+
+library(dplyr)
+
+mtcars$mpg %>% mean()
+mean(mtcars$mpg)
 
 # how many shootings in 2024 had one or more victims killed? ======================================
 # nrow(gva_data[gva_data$year == 2024 & gva_data$Victims.Killed >= 1,])
 # my answer: 291
-
 
 
 # plotting data ===================================================================================

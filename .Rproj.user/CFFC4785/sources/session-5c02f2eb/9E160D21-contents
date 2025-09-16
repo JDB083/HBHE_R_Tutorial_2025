@@ -21,6 +21,7 @@ install.packages("janitor")
 install.packages("viridis")
 install.packages("lubridate")
 
+mtcars
 ```
 
 ## 1.2. Load packages
